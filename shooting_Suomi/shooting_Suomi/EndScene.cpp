@@ -2,6 +2,14 @@
 #include "Scene.h"
 #include "EndScene.h"
 
+CEndScene::CEndScene()
+{
+}
+
+CEndScene::~CEndScene()
+{
+}
+
 void CEndScene::Update()
 {
 }

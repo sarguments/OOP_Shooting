@@ -2,6 +2,14 @@
 #include "Scene.h"
 #include "TitleScene.h"
 
+CTitleScene::CTitleScene()
+{
+}
+
+CTitleScene::~CTitleScene()
+{
+}
+
 void CTitleScene::Update()
 {
 }

@@ -1,5 +1,4 @@
 #include "stdafx.h"
-#include "defineAndEnum.h"
 #include "Base.h"
 #include "Enemy.h"
 

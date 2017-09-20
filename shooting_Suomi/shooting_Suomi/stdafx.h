@@ -9,5 +9,5 @@
 
 #include <Windows.h>
 #include <locale>
-#include "CLinkedList.h"
+#include "defineAndEnum.h"
 #include "Console.h"
