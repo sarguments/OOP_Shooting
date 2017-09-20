@@ -6,9 +6,9 @@ class CBase
 protected:
 	int _x;
 	int _y;
-	eType _type; // 캐스팅 할 필요도 생김
+	eObjType _type; // 캐스팅 할 필요도 생김
 
-	eType GetType();
+	eObjType GetType();
 	bool CheckPos(int x, int y);
 
 public:

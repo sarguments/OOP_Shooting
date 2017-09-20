@@ -10,10 +10,10 @@ private:
 	// TODO : ¸â¹ö º¯¼ö·Î?
 	CLinkedList<CBase*> _gameList; 
 
+
 public:
-	CGameScene();
+	CGameScene(CSceneManager* pMgr);
 	~CGameScene();
 	virtual void Update() override;
 	virtual void Replace() override;
-
 };

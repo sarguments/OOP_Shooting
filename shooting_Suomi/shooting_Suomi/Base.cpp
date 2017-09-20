@@ -1,7 +1,7 @@
 #include "stdafx.h"
 #include "Base.h"
 
-eType CBase::GetType()
+eObjType CBase::GetType()
 {
 	return _type;
 }

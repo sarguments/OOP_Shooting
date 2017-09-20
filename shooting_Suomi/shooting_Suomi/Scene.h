@@ -1,10 +1,14 @@
 #pragma once
 
+#include "SceneManager.h"
+
 class CScene
 {
-private:
+protected:
+	CSceneManager* _pMgr;
 	
 public:
+	
 	virtual void Update() = 0;
 	virtual void Replace() = 0;
 };

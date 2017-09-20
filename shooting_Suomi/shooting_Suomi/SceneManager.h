@@ -6,14 +6,14 @@ class CScene;
 class CSceneManager
 {
 private:
-	CScene* _nextScene;
+	eSceneType _eNextScene = eSceneType::Blank;
 	CScene* _nowScene;
-
-	void Replace();
-	void Update();
 
 public:
 	CSceneManager();
 	~CSceneManager();
 
+	void SetNextScene(eSceneType type);
+	void Replace();
+	void Update();
 };
