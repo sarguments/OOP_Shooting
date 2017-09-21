@@ -3,10 +3,51 @@
 
 HANDLE  hConsole;
 
-//-------------------------------------------------------------
-//		cs_MoveCursor(0, 0);	// 커서를 0, 0 위치로
-//		printf("abcde");		// 0, 0 위치에 글씨를 찍음
-//-------------------------------------------------------------
+// 백버퍼
+char g_backBuf[dfSCREEN_HEIGHT][dfSCREEN_WIDTH];
+
+//////////////////////////////////////////////////////////////
+
+void BufferClear()
+{
+	memset(g_backBuf, 0x20, sizeof(g_backBuf));
+
+	for (int i = 0; i < dfSCREEN_HEIGHT; i++)
+	{
+		g_backBuf[i][dfSCREEN_WIDTH - 1] = '\0';
+	}
+}
+
+bool SpriteDraw(int x, int y, char param)
+{
+	// TODO : 2, 3? 범위체크 먼저
+	if (y < 0 || y > dfSCREEN_HEIGHT || x < 0 || x >(dfSCREEN_WIDTH - 1))
+	{
+		return false;
+	}
+
+	g_backBuf[y][x] = param;
+
+	return true;
+}
+
+void BufferFlip()
+{
+	cs_MoveCursor(0, 0);
+	for (int i = 0; i < dfSCREEN_HEIGHT; i++)
+	{
+		cs_MoveCursor(0, i);
+		printf("%s", g_backBuf[i]);
+	}
+}
+
+void PrintText(int x, int y, WCHAR * param)
+{
+	cs_MoveCursor(x, y);
+	wprintf(L"%s\n", param);
+}
+
+//////////////////////////////////////////////////////////////
 
 //-------------------------------------------------------------
 // 콘솔 제어를 위한 준비 작업.

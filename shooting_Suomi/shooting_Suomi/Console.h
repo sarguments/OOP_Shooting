@@ -7,6 +7,12 @@
 
 #define dfSCREEN_WIDTH		81		// 콘솔 가로 80칸 + NULL
 #define dfSCREEN_HEIGHT		24		// 콘솔 세로 24칸
+
+void BufferClear();
+bool SpriteDraw(int x, int y, char param);
+void BufferFlip();
+void PrintText(int x, int y, WCHAR* param);
+
 //-------------------------------------------------------------
 // 콘솔 제어를 위한 준비 작업.
 //

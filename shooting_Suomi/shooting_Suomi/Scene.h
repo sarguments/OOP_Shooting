@@ -8,7 +8,7 @@ protected:
 	CSceneManager* _pMgr;
 	double _oneSecondFreq;
 	LARGE_INTEGER _beginTime;
-	
+
 public:
 	virtual ~CScene();
 

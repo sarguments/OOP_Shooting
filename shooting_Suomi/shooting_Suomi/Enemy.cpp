@@ -2,8 +2,15 @@
 #include "Base.h"
 #include "Enemy.h"
 
-CEnemy::CEnemy()
+#include "Scene.h"
+#include "SceneManager.h"
+#include "GameScene.h"
+
+#include "CLinkedList.h"
+
+CEnemy::CEnemy(CGameScene* pScene)
 {
+	_pScene = pScene;
 }
 
 CEnemy::~CEnemy()

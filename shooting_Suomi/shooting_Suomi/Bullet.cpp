@@ -1,9 +1,14 @@
 #include "stdafx.h"
 #include "Base.h"
-#include "Scene.h"
 #include "Bullet.h"
 
-CBullet::CBullet(CScene * pScene)
+#include "Scene.h"
+#include "SceneManager.h"
+#include "GameScene.h"
+
+#include "CLinkedList.h"
+
+CBullet::CBullet(CGameScene * pScene)
 {
 	_pScene = pScene;
 }

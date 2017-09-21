@@ -6,6 +6,9 @@ CEndScene::CEndScene(CSceneManager * pMgr)
 {
 	_pMgr = pMgr;
 
+	// 화면 지우기
+	BufferClear();
+
 	// 1초당 타이머 주파수를 얻는다, min, max
 	LARGE_INTEGER freq;
 	QueryPerformanceFrequency(&freq);
@@ -23,8 +26,15 @@ CEndScene::~CEndScene()
 
 void CEndScene::Update()
 {
-	cs_MoveCursor(30, 10);
-	wprintf(L"End의 업데이트\n");
+	///////////////////////////////////////////////
+	BufferClear();
+	char temp[] = "인생..";
+	memcpy(&g_backBuf[5][5], temp, sizeof(temp));
+	BufferFlip();
+	///////////////////////////////////////////////
+
+	//cs_MoveCursor(30, 10);
+	//wprintf(L"End의 업데이트\n");
 
 	// TODO : 테스트
 
@@ -37,7 +47,7 @@ void CEndScene::Update()
 
 	if ((double)diffTime / _oneSecondFreq > 3)
 	{
-		wprintf(L"3초 지남!!\n");
+		//wprintf(L"3초 지남!!\n");
 
 		// beginTime 다시 구함
 		QueryPerformanceCounter(&_beginTime);
@@ -48,7 +58,7 @@ void CEndScene::Update()
 
 void CEndScene::Replace()
 {
-	wprintf(L"End의 리플레이스\n");
+	//wprintf(L"End의 리플레이스\n");
 
 	_pMgr->SetNextScene(eSceneType::Title);
 }

@@ -6,6 +6,9 @@ CTitleScene::CTitleScene(CSceneManager * pMgr)
 {
 	_pMgr = pMgr;
 
+	// 화면 지우기
+	BufferClear();
+
 	// 1초당 타이머 주파수를 얻는다, min, max
 	LARGE_INTEGER freq;
 	QueryPerformanceFrequency(&freq);
@@ -13,7 +16,7 @@ CTitleScene::CTitleScene(CSceneManager * pMgr)
 
 	// begin QueryPerformanceCounter 구해서 넣는다.
 	QueryPerformanceCounter(&_beginTime);
-	
+
 	cs_ClearScreen();
 }
 
@@ -23,8 +26,15 @@ CTitleScene::~CTitleScene()
 
 void CTitleScene::Update()
 {
-	cs_MoveCursor(30, 10);
-	wprintf(L"Title의 업데이트\n");
+	///////////////////////////////////////////////
+	BufferClear();
+	char temp[] = "NOW LOADING...";
+	memcpy(&g_backBuf[5][5], temp, sizeof(temp));
+	BufferFlip();
+	///////////////////////////////////////////////
+
+	//cs_MoveCursor(30, 10);
+	//wprintf(L"Title의 업데이트\n");
 
 	// TODO : 테스트
 
@@ -37,18 +47,20 @@ void CTitleScene::Update()
 
 	if ((double)diffTime / _oneSecondFreq > 3)
 	{
-		wprintf(L"3초 지남!!\n");
+		//wprintf(L"3초 지남!!\n");
 
 		// beginTime 다시 구함
 		QueryPerformanceCounter(&_beginTime);
 
 		Replace();
+
+		//iCnt = 0;
 	}
 }
 
 void CTitleScene::Replace()
 {
-	wprintf(L"Title의 리플레이스\n");
+	//wprintf(L"Title의 리플레이스\n");
 
 	_pMgr->SetNextScene(eSceneType::Game);
 }

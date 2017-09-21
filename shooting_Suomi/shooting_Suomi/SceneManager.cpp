@@ -28,7 +28,7 @@ void CSceneManager::Replace()
 
 	// 기존 씬 삭제
 	delete _nowScene;
-	
+
 	// 다음 씬 객체 생성해서 _nowScene에 넣는다
 	switch (_eNextScene)
 	{

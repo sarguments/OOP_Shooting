@@ -123,7 +123,7 @@
       <Filter>소스 파일\Lib</Filter>
     </ClCompile>
     <ClCompile Include="Scene.cpp">
-      <Filter>소스 파일</Filter>
+      <Filter>소스 파일\SceneManager</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

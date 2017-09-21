@@ -9,7 +9,7 @@
 
 #include <locale>
 #include <Windows.h>
-#include <time.h> 
+#include <time.h>
 
 /////
 
