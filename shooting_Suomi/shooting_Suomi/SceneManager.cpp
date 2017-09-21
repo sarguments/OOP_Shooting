@@ -6,13 +6,16 @@
 #include "GameScene.h"
 #include "EndScene.h"
 
+// 다음 씬 설정(예약)
 void CSceneManager::SetNextScene(eSceneType type)
 {
 	_eNextScene = type;
 }
 
+// 씬 교체
 void CSceneManager::Replace()
 {
+	// 다음 씬이 없으면 리턴
 	if (_eNextScene == eSceneType::Blank)
 	{
 		return;
@@ -23,8 +26,10 @@ void CSceneManager::Replace()
 		return;
 	}
 
+	// 기존 씬 삭제
 	delete _nowScene;
 	
+	// 다음 씬 객체 생성해서 _nowScene에 넣는다
 	switch (_eNextScene)
 	{
 	case eSceneType::Title:
@@ -60,7 +65,7 @@ void CSceneManager::Update()
 
 CSceneManager::CSceneManager()
 {
-	// TODO : 기본 씬 지정
+	// 기본 씬 지정
 	_nowScene = new CTitleScene(this);
 }
 
