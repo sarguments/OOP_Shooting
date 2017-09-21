@@ -6,7 +6,7 @@ private:
 
 public:
 	CTitleScene(CSceneManager * pMgr);
-	~CTitleScene();
+	virtual ~CTitleScene();
 
 	virtual void Update() override;
 	virtual void Replace() override;

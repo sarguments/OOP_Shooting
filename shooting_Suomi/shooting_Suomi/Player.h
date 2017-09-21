@@ -6,7 +6,7 @@ private:
 
 public:
 	CPlayer();
-	~CPlayer();
+	virtual ~CPlayer();
 
 	virtual void Action() override;
 	virtual void Draw() override;

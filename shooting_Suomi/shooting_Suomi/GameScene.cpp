@@ -1,6 +1,10 @@
 #include "stdafx.h"
 
 #include "Base.h"
+#include "Player.h"
+#include "Enemy.h"
+#include "Bullet.h"
+
 #include "Scene.h"
 #include "GameScene.h"
 
@@ -10,6 +14,9 @@ CGameScene::CGameScene(CSceneManager * pMgr)
 {
 	_pMgr = pMgr;
 
+	// 화면 지우기
+	cs_ClearScreen();
+
 	// 1초당 타이머 주파수를 얻는다, min, max
 	LARGE_INTEGER freq;
 	QueryPerformanceFrequency(&freq);
@@ -18,11 +25,25 @@ CGameScene::CGameScene(CSceneManager * pMgr)
 	// begin QueryPerformanceCounter 구해서 넣는다.
 	QueryPerformanceCounter(&_beginTime);
 
-	cs_ClearScreen();
+	CBase* newObject = new CPlayer;
+	_gameList.push_back(newObject);
+	wprintf(L"리스트에 넣다냥!\n");
 }
 
 CGameScene::~CGameScene()
 {
+	CLinkedList<CBase*>::Iterator nowIter = _gameList.begin();
+	CLinkedList<CBase*>::Iterator endIter = _gameList.end();
+
+	while (nowIter != endIter)
+	{
+		CBase* pDelete = (*nowIter);
+		nowIter++;
+		delete pDelete;
+	}
+
+	_gameList.Clear();
+	wprintf(L"리스트 정리 했다냥!\n");
 }
 
 void CGameScene::Update()

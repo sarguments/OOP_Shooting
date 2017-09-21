@@ -12,7 +12,7 @@ private:
 
 public:
 	CGameScene(CSceneManager* pMgr);
-	~CGameScene();
+	virtual ~CGameScene();
 
 	virtual void Update() override;
 	virtual void Replace() override;

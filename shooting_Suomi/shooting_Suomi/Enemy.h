@@ -6,7 +6,7 @@ private:
 
 public:
 	CEnemy();
-	~CEnemy();
+	virtual ~CEnemy();
 
 	virtual void Action() override;
 	virtual void Draw() override;

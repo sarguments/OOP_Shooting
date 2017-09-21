@@ -1,5 +1,8 @@
 #pragma once
 
+// TODO : 전방선언?
+class CScene;
+
 class CBullet : public CBase
 {
 private:
@@ -8,7 +11,7 @@ private:
 
 public:
 	CBullet(CScene* pScene);
-	~CBullet();
+	virtual ~CBullet();
 
 	virtual void Action() override;
 	virtual void Draw() override;

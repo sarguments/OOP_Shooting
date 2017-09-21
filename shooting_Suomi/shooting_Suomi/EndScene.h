@@ -6,7 +6,7 @@ private:
 
 public:
 	CEndScene(CSceneManager * pMgr);
-	~CEndScene();
+	virtual ~CEndScene();
 	
 	virtual void Update() override;
 	virtual void Replace() override;
