@@ -12,3 +12,9 @@ bool CBase::CheckPos(int x, int y)
 
 	return false;
 }
+
+void CBase::SetPos(int x, int y)
+{
+	_x = x;
+	_y = y;
+}

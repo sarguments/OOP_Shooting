@@ -14,4 +14,6 @@ protected:
 public:
 	virtual void Action() = 0;
 	virtual void Draw() = 0;
+
+	void SetPos(int x, int y);
 };

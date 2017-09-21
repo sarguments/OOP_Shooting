@@ -25,12 +25,13 @@ CPlayer::~CPlayer()
 void CPlayer::Action()
 {
 	//wprintf(L"플레이어 액션\n");
+	_x++;
 }
 
 void CPlayer::Draw()
 {
-	SpriteDraw(7, 7, 'U');
-	BufferFlip();
+	SpriteDraw(_x, _y, 'U');
+	//BufferFlip();
 
 	/*
 		// TODO : 테스트

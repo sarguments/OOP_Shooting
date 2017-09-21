@@ -30,9 +30,11 @@ CGameScene::CGameScene(CSceneManager * pMgr)
 
 	// TODO : Å×½ºÆ®
 	CBase* newObject2 = new CPlayer(this);
+	newObject2->SetPos(3, 3);
 	_gameList.push_back(newObject2);
 
 	CBase* newObject3 = new CPlayer(this);
+	newObject3->SetPos(5, 20);
 	_gameList.push_back(newObject3);
 }
 
@@ -66,6 +68,7 @@ void CGameScene::Update()
 	CLinkedList<CBase*>::Iterator nowIter = _gameList.begin();
 	CLinkedList<CBase*>::Iterator endIter = _gameList.end();
 
+	BufferClear();
 	while (nowIter != endIter)
 	{
 		CPlayer* pPlayer = (CPlayer*)(*nowIter);
@@ -74,6 +77,7 @@ void CGameScene::Update()
 
 		nowIter++;
 	}
+	BufferFlip();
 
 	if ((double)diffTime / _oneSecondFreq > 3)
 	{
