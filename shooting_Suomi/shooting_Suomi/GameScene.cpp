@@ -10,6 +10,73 @@
 
 #include "CLinkedList.h"
 
+void CGameScene::GameProc(CBase * param)
+{
+	switch (param->GetType())
+	{
+	case eObjType::Bullet:
+	{
+		CBullet* actionObj = (CBullet*)param;
+		actionObj->Action();
+		actionObj->Draw();
+	}
+	break;
+	case eObjType::Enemy:
+	{
+		CEnemy* actionObj = (CEnemy*)param;
+		actionObj->Action();
+		actionObj->Draw();
+	}
+	break;
+	case eObjType::Player:
+	{
+		CPlayer* actionObj = (CPlayer*)param;
+		actionObj->Action();
+		actionObj->Draw();
+	}
+	break;
+	}
+}
+
+void CGameScene::EndProc()
+{
+	if (_isDead)
+	{
+		_pMgr->SetNextScene(eSceneType::End);
+		//SetReplace();
+	}
+
+	if (_isWin)
+	{
+		///////////////////////////////////////////////
+		char temp[] = "WIN... 3초 뒤 다시 시작합니다";
+		memcpy(&g_backBuf[5][5], temp, sizeof(temp));
+		BufferFlip();
+		///////////////////////////////////////////////
+
+		// begin QueryPerformanceCounter 구해서 넣는다.
+		QueryPerformanceCounter(&_beginTime);
+
+		while (1)
+		{
+			// end QueryPerformanceCounter 구한다.
+			LARGE_INTEGER endTime;
+			QueryPerformanceCounter(&endTime);
+
+			// end - begin
+			__int64 diffTime = endTime.QuadPart - _beginTime.QuadPart;
+
+			if ((double)diffTime / _oneSecondFreq > 3)
+			{
+				//wprintf(L"\n5초 지남!!\n");
+
+				_pMgr->SetNextScene(eSceneType::Title);
+				break;
+			}
+		}
+	}
+}
+
 CGameScene::CGameScene(CSceneManager * pMgr)
 {
 	_pMgr = pMgr;
@@ -25,17 +92,25 @@ CGameScene::CGameScene(CSceneManager * pMgr)
 	// begin QueryPerformanceCounter 구해서 넣는다.
 	QueryPerformanceCounter(&_beginTime);
 
+	// 플레이어 객체 생성
 	CBase* newObject = new CPlayer(this);
 	_gameList.push_back(newObject);
 
-	// TODO : 테스트
-	CBase* newObject2 = new CPlayer(this);
-	newObject2->SetPos(3, 3);
-	_gameList.push_back(newObject2);
+	// TODO : Enemy 초기화
+	const int widthDiff = 5;
+	const int heightDiff = 3;
 
-	CBase* newObject3 = new CPlayer(this);
-	newObject3->SetPos(5, 20);
-	_gameList.push_back(newObject3);
+	for (int i = 0; i < 2; i++)
+	{
+		for (int j = 0; j < 4; j++)
+		{
+			CBase* newEnemy = new CEnemy(this);
+			//CBase* newEnemy = new CEnemy;
+			newEnemy->SetPos(30 + widthDiff * j, 5 + heightDiff * i);
+
+			_gameList.push_back(newEnemy);
+		}
+	}
 }
 
 CGameScene::~CGameScene()
@@ -65,39 +140,53 @@ void CGameScene::Update()
 	// end - begin
 	__int64 diffTime = endTime.QuadPart - _beginTime.QuadPart;
 
+	if ((double)diffTime / _oneSecondFreq > 5)
+	{
+		//wprintf(L"\n5초 지남!!\n");
+
+		//Replace();
+		_isWin = true;
+	}
+
+	/////////////////////////////////////////////////////////////
+
+	// 게임 로직 처리. Action, Draw
 	CLinkedList<CBase*>::Iterator nowIter = _gameList.begin();
 	CLinkedList<CBase*>::Iterator endIter = _gameList.end();
 
 	BufferClear();
 	while (nowIter != endIter)
 	{
-		CPlayer* pPlayer = (CPlayer*)(*nowIter);
-		pPlayer->Action();
-		pPlayer->Draw();
+		// 각 객체 타입에 따른 Action, Draw 호출
+		GameProc(*nowIter);
 
 		nowIter++;
 	}
 	BufferFlip();
 
-	if ((double)diffTime / _oneSecondFreq > 3)
-	{
-		//wprintf(L"\n3초 지남!!\n");
-
-		// beginTime 다시 구함
-		QueryPerformanceCounter(&_beginTime);
-
-		Replace();
-	}
+	// 엔딩 처리
+	EndProc();
 }
 
-void CGameScene::Replace()
-{
-	//wprintf(L"Game의 리플레이스\n");
+//void CGameScene::SetReplace()
+//{
+//	//wprintf(L"Game의 리플레이스\n");
+//	_pMgr->SetNextScene(eSceneType::End);
+//}
 
-	_pMgr->SetNextScene(eSceneType::End);
+void CGameScene::SetDead() // TODO : 테스트용
+{
+	_isDead = true;
 }
 
 CLinkedList<CBase*>* CGameScene::GetListPtr()
 {
 	return &_gameList;
+}
+
+void CGameScene::CreateBullet(eObjType param, int x, int y)
+{
+	CBase* newBullet = new CBullet(this);
+	newBullet->SetPos(x, y);
+	_gameList.push_back(newBullet);
 }

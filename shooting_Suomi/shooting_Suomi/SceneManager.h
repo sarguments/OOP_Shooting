@@ -14,6 +14,6 @@ public:
 	~CSceneManager();
 
 	void SetNextScene(eSceneType type);
-	void Replace();
+	void SetReplace();
 	void Update();
 };

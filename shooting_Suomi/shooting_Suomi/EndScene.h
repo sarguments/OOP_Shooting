@@ -11,5 +11,5 @@ public:
 	virtual ~CEndScene();
 
 	virtual void Update() override;
-	virtual void Replace() override;
+	//virtual void SetReplace() override;
 };

@@ -13,5 +13,5 @@ public:
 	virtual ~CScene();
 
 	virtual void Update() = 0;
-	virtual void Replace() = 0;
+	//virtual void SetReplace() = 0;
 };

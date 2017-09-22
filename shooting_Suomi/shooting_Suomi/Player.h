@@ -14,4 +14,9 @@ public:
 
 	virtual void Action() override;
 	virtual void Draw() override;
+
+	void Move(eDir param);
+	void KeyProcess();
+
+	void Shot();
 };

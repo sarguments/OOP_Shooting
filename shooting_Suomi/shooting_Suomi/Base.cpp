@@ -8,13 +8,19 @@ eObjType CBase::GetType()
 
 bool CBase::CheckPos(int x, int y)
 {
-	// TODO : 이동 범위 체크
+	if (y < 0 || y > (dfSCREEN_HEIGHT - 1) || x < 0 || x >(dfSCREEN_WIDTH - 2))
+	{
+		return false;
+	}
 
-	return false;
+	return true;
 }
 
 void CBase::SetPos(int x, int y)
 {
+	_bornX = x;
+	_bornY = y;
+
 	_x = x;
 	_y = y;
 }

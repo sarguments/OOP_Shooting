@@ -8,12 +8,15 @@ protected:
 	int _y;
 	eObjType _type; // 캐스팅 할 필요도 생김
 
-	eObjType GetType();
-	bool CheckPos(int x, int y);
+	int _bornX;
+	int _bornY;
+	eDir _dir;
 
 public:
 	virtual void Action() = 0;
 	virtual void Draw() = 0;
 
 	void SetPos(int x, int y);
+	bool CheckPos(int x, int y);
+	eObjType GetType();
 };

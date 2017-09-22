@@ -14,3 +14,9 @@ enum eSceneType
 	End,
 	Blank
 };
+
+enum eDir
+{
+	Left = 1,
+	Right
+};

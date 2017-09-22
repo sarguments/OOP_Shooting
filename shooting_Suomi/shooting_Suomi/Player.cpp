@@ -1,6 +1,7 @@
 #include "stdafx.h"
 #include "Base.h"
 #include "Player.h"
+#include "Bullet.h"
 
 #include "Scene.h"
 #include "SceneManager.h"
@@ -13,8 +14,8 @@ CPlayer::CPlayer(CGameScene* pScene)
 	_pScene = pScene;
 
 	// TODO : 플레이어 초기화
-	_x = 10;
-	_y = 10;
+	_x = dfSCREEN_WIDTH / 2;
+	_y = dfSCREEN_HEIGHT - 5;
 	_type = eObjType::Player;
 }
 
@@ -25,20 +26,67 @@ CPlayer::~CPlayer()
 void CPlayer::Action()
 {
 	//wprintf(L"플레이어 액션\n");
-	_x++;
+	KeyProcess();
 }
 
 void CPlayer::Draw()
 {
 	SpriteDraw(_x, _y, 'U');
-	//BufferFlip();
+	// CLinkedList<CBase*>* listPtr = _pScene->GetListPtr();
+}
 
-	/*
-		// TODO : 테스트
-		CLinkedList<CBase*>* listPtr = _pScene->GetListPtr();
-		int size = listPtr->size();
-		wprintf(L"사이즈 : %d\n", size);
+void CPlayer::Move(eDir param)
+{
+	switch (param)
+	{
+	case eDir::Left:
+	{
+		_x--;
+	}
+	break;
+	case eDir::Right:
+	{
+		_x++;
+	}
+	break;
+	}
+}
 
-		wprintf(L"플레이어 드로우\n");
-	*/
+void CPlayer::KeyProcess()
+{
+	if ((GetAsyncKeyState(VK_RIGHT) & 0x8000)) // RR
+	{
+		if (!CheckPos(_x + 1, _y))
+		{
+			return;
+		}
+
+		Move(eDir::Right);
+	}
+
+	if ((GetAsyncKeyState(VK_LEFT) & 0x8000)) // LL
+	{
+		if (!CheckPos(_x - 1, _y))
+		{
+			return;
+		}
+
+		Move(eDir::Left);
+	}
+
+	if ((GetAsyncKeyState(VK_CONTROL) & 0x8000))
+	{
+		// TODO : 총알 발사 명령
+		Shot();
+	}
+
+	if ((GetAsyncKeyState(VK_SPACE) & 0x8000))
+	{
+		_pScene->SetDead();
+	}
+}
+
+void CPlayer::Shot()
+{
+	_pScene->CreateBullet(eObjType::Player, _x, _y - 1);
 }

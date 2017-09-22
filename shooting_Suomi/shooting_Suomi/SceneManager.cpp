@@ -13,7 +13,7 @@ void CSceneManager::SetNextScene(eSceneType type)
 }
 
 // 씬 교체
-void CSceneManager::Replace()
+void CSceneManager::SetReplace()
 {
 	// 다음 씬이 없으면 리턴
 	if (_eNextScene == eSceneType::Blank)

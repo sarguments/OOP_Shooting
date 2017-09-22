@@ -7,8 +7,12 @@ class CEnemy : public CBase
 {
 private:
 	CGameScene* _pScene;
+	//int _bornX;
+	//int _bornY;
+	//eDir _dir;
 
 public:
+	//CEnemy();
 	CEnemy(CGameScene* pScene);
 	virtual ~CEnemy();
 

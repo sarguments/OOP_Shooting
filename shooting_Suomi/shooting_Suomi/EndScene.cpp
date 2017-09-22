@@ -52,13 +52,14 @@ void CEndScene::Update()
 		// beginTime 다시 구함
 		QueryPerformanceCounter(&_beginTime);
 
-		Replace();
+		_pMgr->SetNextScene(eSceneType::Title);
+		//SetReplace();
 	}
 }
 
-void CEndScene::Replace()
-{
-	//wprintf(L"End의 리플레이스\n");
-
-	_pMgr->SetNextScene(eSceneType::Title);
-}
+//void CEndScene::SetReplace()
+//{
+//	//wprintf(L"End의 리플레이스\n");
+//
+//	_pMgr->SetNextScene(eSceneType::Title);
+//}

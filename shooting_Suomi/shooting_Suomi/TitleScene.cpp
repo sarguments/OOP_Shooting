@@ -52,15 +52,16 @@ void CTitleScene::Update()
 		// beginTime 다시 구함
 		QueryPerformanceCounter(&_beginTime);
 
-		Replace();
+		_pMgr->SetNextScene(eSceneType::Game);
+		//SetReplace();
 
 		//iCnt = 0;
 	}
 }
 
-void CTitleScene::Replace()
-{
-	//wprintf(L"Title의 리플레이스\n");
-
-	_pMgr->SetNextScene(eSceneType::Game);
-}
+//void CTitleScene::SetReplace()
+//{
+//	//wprintf(L"Title의 리플레이스\n");
+//
+//	_pMgr->SetNextScene(eSceneType::Game);
+//}

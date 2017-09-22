@@ -11,6 +11,8 @@
 CBullet::CBullet(CGameScene * pScene)
 {
 	_pScene = pScene;
+
+	_type = eObjType::Bullet;
 }
 
 CBullet::~CBullet()
@@ -19,8 +21,10 @@ CBullet::~CBullet()
 
 void CBullet::Action()
 {
+	_y--;
 }
 
 void CBullet::Draw()
 {
+	SpriteDraw(_x, _y, 'i');
 }

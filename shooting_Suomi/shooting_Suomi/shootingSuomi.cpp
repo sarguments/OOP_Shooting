@@ -10,8 +10,10 @@ int main()
 
 	while (1)
 	{
-		g_SceneMgr.Replace();
+		g_SceneMgr.SetReplace();
 		g_SceneMgr.Update();
+
+		Sleep(50);
 	}
 
 	return 0;

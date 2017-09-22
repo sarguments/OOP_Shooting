@@ -12,12 +12,23 @@ private:
 	// TODO : ¸â¹ö º¯¼ö·Î?
 	CLinkedList<CBase*> _gameList;
 
+	// Á×¾ú³Ä, ÀÌ°å³Ä
+	bool _isDead;
+	bool _isWin;
+
+	void GameProc(CBase* param);
+	void EndProc();
+
 public:
 	CGameScene(CSceneManager* pMgr);
 	virtual ~CGameScene();
 
 	virtual void Update() override;
-	virtual void Replace() override;
+	//virtual void SetReplace() override;
+
+	void SetDead();
 
 	CLinkedList<CBase*>* GetListPtr();
+
+	void CreateBullet(eObjType param, int x, int y);
 };
