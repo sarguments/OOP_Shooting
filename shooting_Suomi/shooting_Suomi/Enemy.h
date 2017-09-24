@@ -7,9 +7,6 @@ class CEnemy : public CBase
 {
 private:
 	CGameScene* _pScene;
-	//int _bornX;
-	//int _bornY;
-	//eDir _dir;
 
 public:
 	//CEnemy();
@@ -18,4 +15,6 @@ public:
 
 	virtual void Action() override;
 	virtual void Draw() override;
+
+	void Shot();
 };

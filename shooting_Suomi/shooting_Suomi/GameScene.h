@@ -12,9 +12,8 @@ private:
 	// TODO : ¸â¹ö º¯¼ö·Î?
 	CLinkedList<CBase*> _gameList;
 
-	// Á×¾ú³Ä, ÀÌ°å³Ä
-	bool _isDead;
-	bool _isWin;
+	// Á×¾ú³Ä
+	bool _isDead = false;
 
 	void GameProc(CBase* param);
 	void EndProc();
@@ -31,4 +30,6 @@ public:
 	CLinkedList<CBase*>* GetListPtr();
 
 	void CreateBullet(eObjType param, int x, int y);
+
+	int _enemyNum = 0;
 };

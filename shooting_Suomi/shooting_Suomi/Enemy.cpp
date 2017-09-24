@@ -8,12 +8,6 @@
 
 #include "CLinkedList.h"
 
-//CEnemy::CEnemy()
-//{
-//	_type = eObjType::Enemy;
-//	_dir = eDir::Right;
-//}
-
 CEnemy::CEnemy(CGameScene* pScene)
 {
 	_pScene = pScene;
@@ -50,9 +44,20 @@ void CEnemy::Action()
 	{
 		_x++;
 	}
+
+	int randNum = rand() % 100;
+	if (randNum > 95)
+	{
+		Shot();
+	}
 }
 
 void CEnemy::Draw()
 {
 	SpriteDraw(_x, _y, 'E');
+}
+
+void CEnemy::Shot()
+{
+	_pScene->CreateBullet(eObjType::Enemy, _x, _y + 1);
 }

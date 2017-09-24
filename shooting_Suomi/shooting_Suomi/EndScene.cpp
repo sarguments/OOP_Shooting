@@ -29,14 +29,11 @@ void CEndScene::Update()
 	///////////////////////////////////////////////
 	BufferClear();
 	char temp[] = "인생..";
+	char temp2[] = "END.. 3초후 다시 시작합니다";
 	memcpy(&g_backBuf[5][5], temp, sizeof(temp));
+	memcpy(&g_backBuf[7][5], temp2, sizeof(temp2));
 	BufferFlip();
 	///////////////////////////////////////////////
-
-	//cs_MoveCursor(30, 10);
-	//wprintf(L"End의 업데이트\n");
-
-	// TODO : 테스트
 
 	// end QueryPerformanceCounter 구한다.
 	LARGE_INTEGER endTime;
@@ -47,19 +44,9 @@ void CEndScene::Update()
 
 	if ((double)diffTime / _oneSecondFreq > 3)
 	{
-		//wprintf(L"3초 지남!!\n");
-
 		// beginTime 다시 구함
 		QueryPerformanceCounter(&_beginTime);
 
 		_pMgr->SetNextScene(eSceneType::Title);
-		//SetReplace();
 	}
 }
-
-//void CEndScene::SetReplace()
-//{
-//	//wprintf(L"End의 리플레이스\n");
-//
-//	_pMgr->SetNextScene(eSceneType::Title);
-//}

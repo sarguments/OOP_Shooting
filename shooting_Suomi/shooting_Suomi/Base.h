@@ -19,4 +19,7 @@ public:
 	void SetPos(int x, int y);
 	bool CheckPos(int x, int y);
 	eObjType GetType();
+
+	int GetX();
+	int GetY();
 };

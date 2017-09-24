@@ -46,7 +46,7 @@ void CGameScene::EndProc()
 		//SetReplace();
 	}
 
-	if (_isWin)
+	if (_enemyNum == 0)
 	{
 		///////////////////////////////////////////////
 		char temp[] = "WIN... 3초 뒤 다시 시작합니다";
@@ -96,7 +96,7 @@ CGameScene::CGameScene(CSceneManager * pMgr)
 	CBase* newObject = new CPlayer(this);
 	_gameList.push_back(newObject);
 
-	// TODO : Enemy 초기화
+	// Enemy 초기화
 	const int widthDiff = 5;
 	const int heightDiff = 3;
 
@@ -105,10 +105,10 @@ CGameScene::CGameScene(CSceneManager * pMgr)
 		for (int j = 0; j < 4; j++)
 		{
 			CBase* newEnemy = new CEnemy(this);
-			//CBase* newEnemy = new CEnemy;
 			newEnemy->SetPos(30 + widthDiff * j, 5 + heightDiff * i);
 
 			_gameList.push_back(newEnemy);
+			_enemyNum++;
 		}
 	}
 }
@@ -126,30 +126,10 @@ CGameScene::~CGameScene()
 	}
 
 	_gameList.Clear();
-	//wprintf(L"리스트 정리 했다냥!\n");
 }
 
 void CGameScene::Update()
 {
-	// TODO : 테스트
-
-	// end QueryPerformanceCounter 구한다.
-	LARGE_INTEGER endTime;
-	QueryPerformanceCounter(&endTime);
-
-	// end - begin
-	__int64 diffTime = endTime.QuadPart - _beginTime.QuadPart;
-
-	if ((double)diffTime / _oneSecondFreq > 5)
-	{
-		//wprintf(L"\n5초 지남!!\n");
-
-		//Replace();
-		_isWin = true;
-	}
-
-	/////////////////////////////////////////////////////////////
-
 	// 게임 로직 처리. Action, Draw
 	CLinkedList<CBase*>::Iterator nowIter = _gameList.begin();
 	CLinkedList<CBase*>::Iterator endIter = _gameList.end();
@@ -164,17 +144,29 @@ void CGameScene::Update()
 	}
 	BufferFlip();
 
+	nowIter = _gameList.begin();
+	endIter = _gameList.end();
+
+	while (nowIter != endIter)
+	{
+		CBase* pBase = (*nowIter);
+		int tempX = pBase->GetX();
+		int tempY = pBase->GetY();
+
+		if (!pBase->CheckPos(tempX, tempY))
+		{
+			nowIter = _gameList.erase(nowIter);
+			delete pBase;
+			continue;
+		}
+		nowIter++;
+	}
+
 	// 엔딩 처리
 	EndProc();
 }
 
-//void CGameScene::SetReplace()
-//{
-//	//wprintf(L"Game의 리플레이스\n");
-//	_pMgr->SetNextScene(eSceneType::End);
-//}
-
-void CGameScene::SetDead() // TODO : 테스트용
+void CGameScene::SetDead()
 {
 	_isDead = true;
 }
@@ -186,7 +178,8 @@ CLinkedList<CBase*>* CGameScene::GetListPtr()
 
 void CGameScene::CreateBullet(eObjType param, int x, int y)
 {
-	CBase* newBullet = new CBullet(this);
+	CBase* newBullet = new CBullet(this, param);
 	newBullet->SetPos(x, y);
+
 	_gameList.push_back(newBullet);
 }

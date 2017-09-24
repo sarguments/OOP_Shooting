@@ -13,7 +13,7 @@ CPlayer::CPlayer(CGameScene* pScene)
 {
 	_pScene = pScene;
 
-	// TODO : 플레이어 초기화
+	// 플레이어 초기화
 	_x = dfSCREEN_WIDTH / 2;
 	_y = dfSCREEN_HEIGHT - 5;
 	_type = eObjType::Player;
@@ -25,14 +25,12 @@ CPlayer::~CPlayer()
 
 void CPlayer::Action()
 {
-	//wprintf(L"플레이어 액션\n");
 	KeyProcess();
 }
 
 void CPlayer::Draw()
 {
 	SpriteDraw(_x, _y, 'U');
-	// CLinkedList<CBase*>* listPtr = _pScene->GetListPtr();
 }
 
 void CPlayer::Move(eDir param)
@@ -74,15 +72,9 @@ void CPlayer::KeyProcess()
 		Move(eDir::Left);
 	}
 
-	if ((GetAsyncKeyState(VK_CONTROL) & 0x8000))
-	{
-		// TODO : 총알 발사 명령
-		Shot();
-	}
-
 	if ((GetAsyncKeyState(VK_SPACE) & 0x8000))
 	{
-		_pScene->SetDead();
+		Shot();
 	}
 }
 

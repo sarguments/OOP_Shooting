@@ -13,7 +13,7 @@ int main()
 		g_SceneMgr.SetReplace();
 		g_SceneMgr.Update();
 
-		Sleep(50);
+		Sleep(10);
 	}
 
 	return 0;

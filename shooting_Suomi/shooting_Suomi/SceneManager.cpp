@@ -67,6 +67,8 @@ CSceneManager::CSceneManager()
 {
 	// 기본 씬 지정
 	_nowScene = new CTitleScene(this);
+
+	srand((unsigned int)time(NULL));
 }
 
 CSceneManager::~CSceneManager()
