@@ -68,8 +68,6 @@ void CGameScene::EndProc()
 
 			if ((double)diffTime / _oneSecondFreq > 3)
 			{
-				//wprintf(L"\n5ÃÊ Áö³²!!\n");
-
 				_pMgr->SetNextScene(eSceneType::Title);
 				break;
 			}

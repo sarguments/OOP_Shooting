@@ -22,21 +22,71 @@ CTitleScene::CTitleScene(CSceneManager * pMgr)
 
 CTitleScene::~CTitleScene()
 {
+	CLinkedList<stMatrix*>::Iterator nowIter = _titleList.begin();
+	CLinkedList<stMatrix*>::Iterator endIter = _titleList.end();
+
+	while (nowIter != endIter)
+	{
+		stMatrix* pDelete = (*nowIter);
+		nowIter++;
+		delete pDelete;
+	}
+
+	_titleList.Clear();
 }
 
 void CTitleScene::Update()
 {
-	///////////////////////////////////////////////
 	BufferClear();
-	char temp[] = "NOW LOADING...";
-	memcpy(&g_backBuf[5][5], temp, sizeof(temp));
-	BufferFlip();
+
+	const int SCREEN_WIDTH = 81;
+	const int SCREEN_HEIGHT = 24;
+
+	if (rand() % 100 > 70)
+	{
+		stMatrix* tempObj = new stMatrix;
+		tempObj->_ch = rand() % ('Z' - 'A') + 'A';
+		tempObj->_distance = rand() % SCREEN_HEIGHT;
+		tempObj->_nFrame = (rand() % 5) + 1;
+		tempObj->_nStay = tempObj->_nFrame;
+		tempObj->_x = rand() % (SCREEN_WIDTH - 2);
+		tempObj->_y = 0;
+
+		_titleList.push_back(tempObj);
+	}
+
+	CLinkedList<stMatrix*>::Iterator nowIter = _titleList.begin();
+	CLinkedList<stMatrix*>::Iterator endIter = _titleList.end();
+
+	while (nowIter != endIter)
+	{
+		stMatrix* pObj = *(nowIter);
+
+		--pObj->_nStay;
+
+		if (pObj->_nStay == 0)
+		{
+			++pObj->_y;
+			pObj->_nStay = pObj->_nFrame;
+		}
+
+		if (pObj->_distance == pObj->_y || pObj->_y > (SCREEN_HEIGHT - 1))
+		{
+			nowIter = _titleList.erase(nowIter);
+			delete pObj;
+			continue;
+		}
+
+		SpriteDraw(pObj->_x, pObj->_y, pObj->_ch);
+
+		nowIter++;
+	}
+
 	///////////////////////////////////////////////
-
-	//cs_MoveCursor(30, 10);
-	//wprintf(L"Title의 업데이트\n");
-
-	// TODO : 테스트
+	char temp[] = "NOW LOADING...";
+	memcpy(&g_backBuf[SCREEN_HEIGHT - 1][5], temp, sizeof(temp));
+ 	BufferFlip();
+	///////////////////////////////////////////////
 
 	// end QueryPerformanceCounter 구한다.
 	LARGE_INTEGER endTime;
@@ -45,23 +95,11 @@ void CTitleScene::Update()
 	// end - begin
 	__int64 diffTime = endTime.QuadPart - _beginTime.QuadPart;
 
-	if ((double)diffTime / _oneSecondFreq > 3)
+	if ((double)diffTime / _oneSecondFreq > 5)
 	{
-		//wprintf(L"3초 지남!!\n");
-
 		// beginTime 다시 구함
 		QueryPerformanceCounter(&_beginTime);
 
 		_pMgr->SetNextScene(eSceneType::Game);
-		//SetReplace();
-
-		//iCnt = 0;
 	}
 }
-
-//void CTitleScene::SetReplace()
-//{
-//	//wprintf(L"Title의 리플레이스\n");
-//
-//	_pMgr->SetNextScene(eSceneType::Game);
-//}

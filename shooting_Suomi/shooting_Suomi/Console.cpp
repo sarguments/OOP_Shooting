@@ -41,12 +41,6 @@ void BufferFlip()
 	}
 }
 
-void PrintText(int x, int y, WCHAR * param)
-{
-	cs_MoveCursor(x, y);
-	wprintf(L"%s\n", param);
-}
-
 //////////////////////////////////////////////////////////////
 
 //-------------------------------------------------------------

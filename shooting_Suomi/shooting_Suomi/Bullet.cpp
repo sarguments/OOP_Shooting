@@ -20,7 +20,7 @@ void CBullet::HeatScan(CBase * param)
 		CLinkedList<CBase*>::Iterator InNowIter = ListPtr->begin();
 		CLinkedList<CBase*>::Iterator InEndIter = ListPtr->end();
 
-		while (InNowIter != InEndIter)
+		while (InNowIter != InEndIter) 
 		{
 			CBase* destPtr = (*InNowIter);
 
