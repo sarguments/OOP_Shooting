@@ -2,14 +2,12 @@
 
 extern char g_backBuf[dfSCREEN_HEIGHT][dfSCREEN_WIDTH];
 
-// TODO : header include ¹®Á¦
 #include "CLinkedList.h"
 class CBase;
 
 class CGameScene : public CScene
 {
 private:
-	// TODO : ¸â¹ö º¯¼ö·Î?
 	CLinkedList<CBase*> _gameList;
 
 	// Á×¾ú³Ä
@@ -25,10 +23,9 @@ public:
 	virtual void Update() override;
 	//virtual void SetReplace() override;
 
-	void SetDead();
-
 	CLinkedList<CBase*>* GetListPtr();
 
+	void SetDead();
 	void CreateBullet(eObjType param, int x, int y);
 
 	int _enemyNum = 0;

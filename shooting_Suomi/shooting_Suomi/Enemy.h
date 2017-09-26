@@ -1,6 +1,5 @@
 #pragma once
 
-// TODO : 전방선언?
 class CGameScene;
 
 class CEnemy : public CBase

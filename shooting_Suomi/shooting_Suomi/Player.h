@@ -1,6 +1,5 @@
 #pragma once
 
-// TODO : 전방선언?
 class CGameScene;
 
 class CPlayer : public CBase
@@ -17,6 +16,5 @@ public:
 
 	void Move(eDir param);
 	void KeyProcess();
-
 	void Shot();
 };
