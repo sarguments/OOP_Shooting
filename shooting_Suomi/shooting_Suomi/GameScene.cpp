@@ -1,13 +1,13 @@
 #include "stdafx.h"
+#include "Scene.h"
+#include "GameScene.h"
 
 #include "Base.h"
 #include "Player.h"
 #include "Enemy.h"
 #include "Bullet.h"
 
-#include "Scene.h"
-#include "GameScene.h"
-
+#include "SceneManager.h"
 #include "CLinkedList.h"
 
 void CGameScene::GameProc(CBase * param)
@@ -49,8 +49,8 @@ void CGameScene::EndProc()
 	if (_enemyNum == 0)
 	{
 		///////////////////////////////////////////////
-		char temp[] = "WIN... 3초 뒤 다시 시작합니다";
-		memcpy(&g_backBuf[5][5], temp, sizeof(temp));
+		char textBuf[] = "WIN... 3초 뒤 다시 시작합니다";
+		memcpy(&g_backBuf[5][5], textBuf, sizeof(textBuf));
 		BufferFlip();
 		///////////////////////////////////////////////
 

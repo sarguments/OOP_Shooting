@@ -1,17 +1,13 @@
 #include "stdafx.h"
 #include "Base.h"
 #include "Player.h"
-#include "Bullet.h"
 
 #include "Scene.h"
-#include "SceneManager.h"
 #include "GameScene.h"
-
-#include "CLinkedList.h"
 
 CPlayer::CPlayer(CGameScene* pScene)
 {
-	_pScene = pScene;
+	_pGameScene = pScene;
 
 	// 플레이어 초기화
 	_x = dfSCREEN_WIDTH / 2;
@@ -80,5 +76,5 @@ void CPlayer::KeyProcess()
 
 void CPlayer::Shot()
 {
-	_pScene->CreateBullet(eObjType::Player, _x, _y - 1);
+	_pGameScene->CreateBullet(eObjType::Player, _x, _y - 1);
 }

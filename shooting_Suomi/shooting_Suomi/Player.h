@@ -5,14 +5,14 @@ class CGameScene;
 class CPlayer : public CBase
 {
 private:
-	CGameScene* _pScene;
+	CGameScene* _pGameScene;
 
 public:
 	CPlayer(CGameScene* pScene);
 	virtual ~CPlayer();
 
-	virtual void Action() override;
-	virtual void Draw() override;
+	virtual void Action();
+	virtual void Draw();
 
 	void Move(eDir param);
 	void KeyProcess();

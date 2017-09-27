@@ -3,14 +3,11 @@
 #include "Enemy.h"
 
 #include "Scene.h"
-#include "SceneManager.h"
 #include "GameScene.h"
-
-#include "CLinkedList.h"
 
 CEnemy::CEnemy(CGameScene* pScene)
 {
-	_pScene = pScene;
+	_pGameScene = pScene;
 
 	_type = eObjType::Enemy;
 	_dir = eDir::Right;
@@ -59,5 +56,5 @@ void CEnemy::Draw()
 
 void CEnemy::Shot()
 {
-	_pScene->CreateBullet(eObjType::Enemy, _x, _y + 1);
+	_pGameScene->CreateBullet(eObjType::Enemy, _x, _y + 1);
 }

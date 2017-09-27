@@ -16,9 +16,6 @@
     <Filter Include="헤더 파일\Scene">
       <UniqueIdentifier>{dc2c1a40-2f05-4a27-bc09-b0756091471a}</UniqueIdentifier>
     </Filter>
-    <Filter Include="헤더 파일\SceneManager">
-      <UniqueIdentifier>{5b59259d-ad62-4fe6-9938-3f79a18a2885}</UniqueIdentifier>
-    </Filter>
     <Filter Include="소스 파일\Scene">
       <UniqueIdentifier>{3e650c53-7277-402b-a399-d213d822a4aa}</UniqueIdentifier>
     </Filter>
@@ -39,6 +36,9 @@
     </Filter>
     <Filter Include="소스 파일\Lib">
       <UniqueIdentifier>{a7de5428-92cf-40ed-a632-fc9746fd41a9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="헤더 파일\SceneManager">
+      <UniqueIdentifier>{5b59259d-ad62-4fe6-9938-3f79a18a2885}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -123,7 +123,7 @@
       <Filter>소스 파일\SceneManager</Filter>
     </ClCompile>
     <ClCompile Include="Player.cpp">
-      <Filter>소스 파일\Scene</Filter>
+      <Filter>소스 파일\Object</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

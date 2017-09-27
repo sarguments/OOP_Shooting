@@ -1,8 +1,10 @@
 #pragma once
 
+#include "CLinkedList.h"
+
 extern char g_backBuf[dfSCREEN_HEIGHT][dfSCREEN_WIDTH];
 
-#include "CLinkedList.h"
+class CSeneManager;
 
 struct stMatrix
 {
@@ -23,6 +25,6 @@ public:
 	CTitleScene(CSceneManager * pMgr);
 	virtual ~CTitleScene();
 
-	virtual void Update() override;
+	virtual void Update();
 	//virtual void SetReplace() override;
 };

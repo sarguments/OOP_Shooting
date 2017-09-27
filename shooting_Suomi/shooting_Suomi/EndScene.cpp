@@ -2,6 +2,8 @@
 #include "Scene.h"
 #include "EndScene.h"
 
+#include "SceneManager.h"
+
 CEndScene::CEndScene(CSceneManager * pMgr)
 {
 	_pMgr = pMgr;
@@ -28,10 +30,10 @@ void CEndScene::Update()
 {
 	///////////////////////////////////////////////
 	BufferClear();
-	char temp[] = "인생..";
-	char temp2[] = "END.. 3초후 다시 시작합니다";
-	memcpy(&g_backBuf[5][5], temp, sizeof(temp));
-	memcpy(&g_backBuf[7][5], temp2, sizeof(temp2));
+	//char temp[] = "인생..";
+	char textBuf[] = "END.. 3초후 다시 시작합니다";
+	//memcpy(&g_backBuf[5][5], temp, sizeof(temp));
+	memcpy(&g_backBuf[7][5], textBuf, sizeof(textBuf));
 	BufferFlip();
 	///////////////////////////////////////////////
 

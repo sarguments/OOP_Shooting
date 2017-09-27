@@ -1,9 +1,11 @@
 #pragma once
 
+#include "CLinkedList.h"
+
 extern char g_backBuf[dfSCREEN_HEIGHT][dfSCREEN_WIDTH];
 
-#include "CLinkedList.h"
 class CBase;
+class CSceneManager;
 
 class CGameScene : public CScene
 {
@@ -20,7 +22,7 @@ public:
 	CGameScene(CSceneManager* pMgr);
 	virtual ~CGameScene();
 
-	virtual void Update() override;
+	virtual void Update();
 	//virtual void SetReplace() override;
 
 	CLinkedList<CBase*>* GetListPtr();

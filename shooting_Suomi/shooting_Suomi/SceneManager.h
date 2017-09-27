@@ -1,6 +1,5 @@
 #pragma once
 
-// TODO : 헤더 포함 문제
 class CScene;
 
 class CSceneManager

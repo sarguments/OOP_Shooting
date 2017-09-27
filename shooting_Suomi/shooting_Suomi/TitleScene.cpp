@@ -2,6 +2,8 @@
 #include "Scene.h"
 #include "TitleScene.h"
 
+#include "SceneManager.h"
+
 CTitleScene::CTitleScene(CSceneManager * pMgr)
 {
 	_pMgr = pMgr;
@@ -83,9 +85,9 @@ void CTitleScene::Update()
 	}
 
 	///////////////////////////////////////////////
-	char temp[] = "NOW LOADING...";
-	memcpy(&g_backBuf[SCREEN_HEIGHT - 1][5], temp, sizeof(temp));
- 	BufferFlip();
+	char textBuf[] = "NOW LOADING...";
+	memcpy(&g_backBuf[SCREEN_HEIGHT - 1][5], textBuf, sizeof(textBuf));
+	BufferFlip();
 	///////////////////////////////////////////////
 
 	// end QueryPerformanceCounter ±¸ÇÑ´Ù.

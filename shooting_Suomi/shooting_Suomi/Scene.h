@@ -1,6 +1,6 @@
 #pragma once
 
-#include "SceneManager.h"
+class CSceneManager;
 
 class CScene
 {

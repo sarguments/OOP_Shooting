@@ -11,7 +11,6 @@
 void BufferClear();
 bool SpriteDraw(int x, int y, char param);
 void BufferFlip();
-void PrintText(int x, int y, WCHAR* param);
 
 //-------------------------------------------------------------
 // 콘솔 제어를 위한 준비 작업.

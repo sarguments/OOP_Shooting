@@ -3,14 +3,13 @@
 #include "Bullet.h"
 
 #include "Scene.h"
-#include "SceneManager.h"
 #include "GameScene.h"
 
 #include "CLinkedList.h"
 
 void CBullet::HeatScan(CBase * param)
 {
-	CLinkedList<CBase*>* ListPtr = _pScene->GetListPtr();
+	CLinkedList<CBase*>* ListPtr = _pGameScene->GetListPtr();
 
 	// 누가 쏜건지 검사
 	eObjType fireObj = ((CBullet*)param)->GetFireObj();
@@ -20,7 +19,7 @@ void CBullet::HeatScan(CBase * param)
 		CLinkedList<CBase*>::Iterator InNowIter = ListPtr->begin();
 		CLinkedList<CBase*>::Iterator InEndIter = ListPtr->end();
 
-		while (InNowIter != InEndIter) 
+		while (InNowIter != InEndIter)
 		{
 			CBase* destPtr = (*InNowIter);
 
@@ -43,7 +42,7 @@ void CBullet::HeatScan(CBase * param)
 				CBase* deleteObj = (*InNowIter);
 				InNowIter = ListPtr->erase(InNowIter);
 				delete deleteObj;
-				_pScene->_enemyNum--;
+				_pGameScene->_enemyNum--;
 				continue;
 			}
 			else
@@ -85,7 +84,7 @@ void CBullet::HeatScan(CBase * param)
 				delete deleteObj;
 
 				// 사망 처리
-				_pScene->SetDead();
+				_pGameScene->SetDead();
 				return;
 			}
 			else
@@ -99,7 +98,7 @@ void CBullet::HeatScan(CBase * param)
 
 CBullet::CBullet(CGameScene * pScene, eObjType param)
 {
-	_pScene = pScene;
+	_pGameScene = pScene;
 
 	_type = eObjType::Bullet;
 	_fireObject = param;
@@ -123,7 +122,7 @@ void CBullet::Action()
 
 	/////////////////////////////////
 
-	CLinkedList<CBase*>* ListPtr = _pScene->GetListPtr();
+	CLinkedList<CBase*>* ListPtr = _pGameScene->GetListPtr();
 
 	CLinkedList<CBase*>::Iterator nowIter = ListPtr->begin();
 	CLinkedList<CBase*>::Iterator endIter = ListPtr->end();

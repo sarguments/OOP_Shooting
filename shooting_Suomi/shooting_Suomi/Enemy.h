@@ -5,15 +5,15 @@ class CGameScene;
 class CEnemy : public CBase
 {
 private:
-	CGameScene* _pScene;
+	CGameScene* _pGameScene;
 
 public:
 	//CEnemy();
 	CEnemy(CGameScene* pScene);
 	virtual ~CEnemy();
 
-	virtual void Action() override;
-	virtual void Draw() override;
+	virtual void Action();
+	virtual void Draw();
 
 	void Shot();
 };
